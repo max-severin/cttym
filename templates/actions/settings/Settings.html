@@ -5,106 +5,104 @@
 <h1>[`Cheaper than the Yandex market`]</h1>
 
 <div id="s-cttym-product-list-table-container">
-    <table class="zebra single-lined" id="cttym-product-list">
-        <tr class="header">
-            <th class="min-width">[`ID`]</th>
-            <th>
+    <div class="zebra single-lined table" id="cttym-product-list">
+        <div class="header tr">
+            <div class="min-width td">[`ID`]</div>
+            <div class="td">
                 <span title="[`Product`]">
                     [`Product`]
                 </span>
-            </th>
-            <th>
+            </div>
+            <div class="td">
                 <span title="[`Yandex market url`]">
                     [`Yandex market url`]
                 </span>
-            </th>
-            <th>
+            </div>
+            <div class="td">
                 <span title="[`Html identifier`]">
                     [`Html identifier`]
                 </span>
-            </th>
-            <th>
+            </div>
+            <div class="td">
                 <span title="[`Price difference`]">
                     [`Price difference`]
                 </span>
-            </th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr class="cttym-add-product">
-            <td></td>       
-            <td class="short nowrap align-left" title="[`Product`]">
-            	<input type="text" value="" name="product_name" class="cttym-add-product-name-input" />
-            	<input type="hidden" value="" name="product_id" class="cttym-add-product-id-input" />
-        	</td>
-            <td class="short nowrap align-left" title="[`Yandex market url`]">
-            	<textarea name="ym_url"></textarea>
-        	</td>
-            <td class="short nowrap align-left" title="[`Html identifier`]">
-            	<input type="text" value="" name="id_in_html" />
-        	</td>
-            <td class="short nowrap align-left" title="[`Price difference`]">
-            	<input type="text" value="{$p.price_diff}" name="price_diff" />
-        	</td>
-            <td></td>
-            <td></td>
-            <td>            	
-                <a href="#" class="cttym-product-save">
-                    <i class="icon16 update"></i>[`save`]
-                </a>
-            </td>
-        </tr>
+            </div>
+            <div class="td"></div>
+            <div class="td"></div>
+            <div class="td"></div>
+        </div>
+        <form class="cttym-product tr" cttym-item-id="0" action="?plugin=cttym&action=saveproduct" method="post">
+                <div class="td"></div>       
+                <div class="short nowrap align-left td" title="[`Product`]">
+                	<input type="text" value="" name="product_name" class="cttym-add-product-name-input" style="width: 366px!important" autocomplete="off" />
+                	<input type="hidden" value="" name="product_id" class="cttym-add-product-id-input" />
+            	</div>
+                <div class="short nowrap align-left td" title="[`Yandex market url`]">
+                	<textarea name="ym_url"></textarea>
+            	</div>
+                <div class="short nowrap align-left td" title="[`Html identifier`]">
+                	<input type="text" value="" name="id_in_html" />
+            	</div>
+                <div class="short nowrap align-left td" title="[`Price difference`]">
+                	<input type="text" value="{$p.price_diff}" name="price_diff" />
+            	</div>
+                <div class="td"></div>
+                <div class="td"></div>
+                <div class="td">      
+                    <input type="submit" class="button green" value="{_w('Save')}" />
+                </div>
+        </form>
         {if $cttym_products}
 	        {foreach $cttym_products as $p}
-	        <tr class="cttym-product">        
-	            <td class="min-width" title="[`ID`]">{$p.id}</td>        
-	            <td class="short nowrap align-left" title="[`Product`]">
-	            	<!-- IMAGE -->
-	            	<a href="{$p.product.frontend_url}" title="{$p.product.name}" target="_blank">{$p.product.name|truncate:30}</a>
-	            	<input type="text" value="{$p.product.name}" name="product_name" class="cttym-add-product-name-input" />
-            		<input type="hidden" value="{$p.product.id}" name="product_id" class="cttym-add-product-id-input" />
-	        	</td>
-	            <td class="short nowrap align-left" title="[`Yandex market url`]">
-	            	<a href="{$p.ym_url}" target="_blank">{$p.ym_url|truncate:30}</a>
-	            	<textarea name="ym_url">{$p.ym_url}</textarea>
-	        	</td>
-	            <td class="short nowrap align-left" title="[`Html identifier`]">
-	            	<input type="text" value="{$p.id_in_html}" name="id_in_html" />
-	        	</td>
-	            <td class="short nowrap align-left" title="[`Price difference`]">
-	            	<input type="text" value="{$p.price_diff}" name="price_diff" />
-	        	</td>
-	            <td class="short nowrap align-right">
-	                <a href="#" class="cttym-product-execute" cttym-product-id="{$p.id}">
-	                    <i class="icon16 yes"></i>[`execute`]
-	                </a>
-	            </td>
-	            <td class="short nowrap align-right">
-	                <a href="#" class="cttym-product-update" cttym-product-id="{$p.id}">
-	                    <i class="icon16 edit"></i>[`update`]
-	                </a>
-	                <a href="#" class="cttym-product-save" cttym-product-id="{$p.id}">
-	                    <i class="icon16 update"></i>[`save`]
-	                </a>
-	            </td>
-	            <td class="short nowrap align-right">
-	                <a href="#" class="cttym-product-delete" cttym-product-id="{$r.id}">
-	                    <i class="icon16 delete"></i>[`delete`]
-	                </a>
-	            </td>
-	        </tr>
+    	        <form class="cttym-product tr" cttym-item-id="{$p.id}">        
+    	            <div class="min-width td" title="[`ID`]">{$p.id}</div>        
+    	            <div class="short nowrap align-left td" title="[`Product`]">
+    	            	<!-- IMAGE -->
+    	            	<a href="{$p.product.frontend_url}" title="{$p.product.name}" target="_blank">{$p.product.name|truncate:30}</a>
+    	            	<input type="text" value="{$p.product.name}" name="product_name" class="cttym-add-product-name-input" style="width: 366px!important"  autocomplete="off" />
+                		<input type="hidden" value="{$p.product.id}" name="product_id" class="cttym-add-product-id-input" />
+    	        	</div>
+    	            <div class="short nowrap align-left td" title="[`Yandex market url`]">
+    	            	<a href="{$p.ym_url}" target="_blank">{$p.ym_url|truncate:30}</a>
+    	            	<textarea name="ym_url">{$p.ym_url}</textarea>
+    	        	</div>
+    	            <div class="short nowrap align-left td" title="[`Html identifier`]">
+    	            	<input type="text" value="{$p.id_in_html}" name="id_in_html" />
+    	        	</div>
+    	            <div class="short nowrap align-left td" title="[`Price difference`]">
+    	            	<input type="text" value="{$p.price_diff}" name="price_diff" />
+    	        	</div>
+    	            <div class="short nowrap align-right td">
+    	                <a href="#" class="cttym-product-execute" cttym-product-id="{$p.id}">
+    	                    <i class="icon16 yes"></i>[`execute`]
+    	                </a>
+    	            </div>
+    	            <div class="short nowrap align-right td">
+    	                <a href="#" class="cttym-product-update" cttym-product-id="{$p.id}">
+    	                    <i class="icon16 edit"></i>[`update`]
+    	                </a>
+    	                <a href="#" class="cttym-product-save" cttym-product-id="{$p.id}">
+    	                    <i class="icon16 update"></i>[`save`]
+    	                </a>
+    	            </div>
+    	            <div class="short nowrap align-right td">
+    	                <a href="#" class="cttym-product-delete" cttym-product-id="{$r.id}">
+    	                    <i class="icon16 delete"></i>[`delete`]
+    	                </a>
+    	            </div>
+    	        </form>
 	        {/foreach}
         {else}
-        	<tr class="cttym-non-product">        
-	            <td class="min-width" colspan="8">
+        	<div class="cttym-non-product tr">        
+	            <div class="min-width td" colspan="8">
 				    <div class="block double-padded align-center gray">
 				        <strong>[`No products.`]</strong>
 				    </div>
-			    </td>
-		    </tr>
+			    </div>
+		    </div>
 		{/if}
-    </table>
+    </div>
 </div>
 
 {wa_pagination total=$pages_count attrs=['class' => "menu-h block top-padded"]}
