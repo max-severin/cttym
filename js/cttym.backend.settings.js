@@ -8,7 +8,7 @@
 var cttymBackendSettings = (function () { "use strict";
     //---------------- BEGIN MODULE SCOPE VARIABLES ---------------
     var
-        getProductBlock, keyupTimeout, ajaxSendQuery, onSearchInputKeyup, searchAjaxStatus, onResultBlockScroll, onNonResultBlockClick, onChoosingProduct, onFormSubmitVerify, initModule;
+        getProductBlock, keyupTimeout, ajaxSendQuery, onSearchInputKeyup, searchAjaxStatus, onResultBlockScroll, onNonResultBlockClick, onChoosingProduct, onFormSubmitVerify, onDeleteHandler, initModule;
     //----------------- END MODULE SCOPE VARIABLES ----------------
 
     //--------------------- BEGIN DOM METHODS ---------------------
@@ -221,6 +221,30 @@ var cttymBackendSettings = (function () { "use strict";
             return false;
         }
     };
+
+    onDeleteHandler = function (event) {
+        if(confirm("{_wp('Delete?')}")) {
+
+            event.preventDefault();
+
+            var t = $(this);
+
+            var id = t.closest('form').attr('cttym-item-id');
+
+            if (id) {
+                $.post('?plugin=cttym&action=deleteproduct', { 'id': id }, function (response) {
+                    if (response.data === true) {                        
+                        $(".cttym-product[cttym-item-id='"+id+"']").hide(600, function () {
+                            $(this).show("normal");
+                            
+                            $(this).remove();
+                        });
+                    }
+                }, "json");
+            }
+
+        }
+    };
     //------------------- END EVENT HANDLERS ----------------------
 
     //------------------- BEGIN PUBLIC METHODS --------------------
@@ -233,6 +257,8 @@ var cttymBackendSettings = (function () { "use strict";
 
         $(document).on('submit', '.cttym-product', { 'type': 'submit' }, onFormSubmitVerify);
         $(document).on('change', '.cttym-product input[type="text"], textarea', { 'type': 'keyup' }, onFormSubmitVerify);
+
+        $('.cttym-product-delete').on('click', onDeleteHandler);
     };
 
     return {
