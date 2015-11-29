@@ -8,7 +8,7 @@
 var cttymBackendSettings = (function () { "use strict";
     //---------------- BEGIN MODULE SCOPE VARIABLES ---------------
     var
-        getProductBlock, keyupTimeout, ajaxSendQuery, onSearchInputKeyup, searchAjaxStatus, onResultBlockScroll, onNonResultBlockClick, onChoosingProduct, onFormSubmitVerify, onDeleteHandler, initModule;
+        getProductBlock, keyupTimeout, ajaxSendQuery, onSearchInputKeyup, searchAjaxStatus, onResultBlockScroll, onNonResultBlockClick, onChoosingProduct, onFormSubmitVerify, onDeleteHandler, onUpdateHandler, initModule;
     //----------------- END MODULE SCOPE VARIABLES ----------------
 
     //--------------------- BEGIN DOM METHODS ---------------------
@@ -245,6 +245,15 @@ var cttymBackendSettings = (function () { "use strict";
 
         }
     };
+
+    onUpdateHandler = function (event) {
+        var t = $(this);
+        var f = t.closest('form');
+
+        f.find('input[name="product_name"], textarea[name="ym_url"], input[name="id_in_html"], input[name="price_diff"], input[type="submit"]').each(function () {
+            $(this).show().prev().hide();
+        });
+    };
     //------------------- END EVENT HANDLERS ----------------------
 
     //------------------- BEGIN PUBLIC METHODS --------------------
@@ -259,6 +268,8 @@ var cttymBackendSettings = (function () { "use strict";
         $(document).on('change', '.cttym-product input[type="text"], textarea', { 'type': 'keyup' }, onFormSubmitVerify);
 
         $('.cttym-product-delete').on('click', onDeleteHandler);
+
+        $('.cttym-product-update').on('click', onUpdateHandler);
     };
 
     return {
