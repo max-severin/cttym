@@ -46,4 +46,28 @@ class shopCttymPluginBackendActions extends waViewActions {
         $this->redirect('?action=plugins#/cttym/');
     }
 
+    public function changepriceAction () {
+        $id = waRequest::get('id', 0, 'int');
+        $model = new shopCttymPluginProductModel();
+
+        $product = $model->getById($id);
+
+        $p = new shopProduct($product['product_id']);
+        // $p['price']
+
+        $ym_html = file_get_contents($product['ym_url']);
+
+        preg_match_all('/<div class=\"snippet-card__price\">(.*)<\/div>/siU', $ym_html, $matches);
+        print_r($ym_html);
+        
+        for($i=(int)$start; $i < (int)$end; $i++) {
+            $item = $matches[0][$i];
+            echo '<pre>'; print_r($item); echo '</pre>';
+        }
+        echo '</br>';
+        exit();
+        
+        $this->redirect('?action=plugins#/cttym/');
+    }
+
 }
